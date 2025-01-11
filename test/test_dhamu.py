@@ -3,7 +3,6 @@ from utilities.BaseClass import Baseclass
 
 
 class Test(Baseclass):
-    confirm = None
 
     def setup_method(self, method):
         self.home = Homepage(self.driver)
@@ -31,7 +30,11 @@ class Test(Baseclass):
     def test_create_opportunity(self):
         self.home.createOpportunity("Dhamodharan1","XYZ")
 
-    def test_verify_contact_and_opportunity(self):
+    def test_verify_contact(self):
         self.home.verify_contact("Dhamodharan1","Vemula")
+
+    def test_verify_opportunity(self):
+        self.home.verify_opportunity("XYZ","Dhamodharan1")
+
 
 

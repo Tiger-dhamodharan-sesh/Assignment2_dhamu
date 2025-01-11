@@ -2,6 +2,8 @@ import time
 from selenium.webdriver.support.wait import WebDriverWait
 from datetime import datetime, timedelta
 from pages.locators import Locators
+from selenium.webdriver.common.action_chains import ActionChains
+
 
 class Homepage:
 
@@ -58,7 +60,7 @@ class Homepage:
     def createAccount(self,account_name):
         time.sleep(10)
         self.driver.find_element(*Locators.accounts_dropdown).click()
-        time.sleep(4)
+        time.sleep(10)
         self.driver.execute_script('arguments[0].click();',self.driver.find_element(*Locators.new_account_icon))
         time.sleep(5)
         self.driver.find_element(*Locators.account_name_field).send_keys(account_name)
@@ -102,11 +104,25 @@ class Homepage:
         time.sleep(5)
         self.driver.execute_script('arguments[0].click();',self.driver.find_element(*Locators.recent_method(account_name)))
         time.sleep(5)
-        self.driver.find_element(*Locators.contact_link).click()
+        self.driver.execute_script('arguments[0].click();',self.driver.find_element(*Locators.contact_link))
         time.sleep(5)
         actual_contact_name=self.driver.find_element(*Locators.contact_name).text
 
         assert contact_name == actual_contact_name,f"Expected {contact_name} , but got {actual_contact_name}"
+
+    def verify_opportunity(self,opportunity,account_name):
+        time.sleep(5)
+        self.driver.find_element(*Locators.accounts_dropdown).click()
+        time.sleep(5)
+        self.driver.execute_script('arguments[0].click();',
+                                   self.driver.find_element(*Locators.recent_method(account_name)))
+        time.sleep(5)
+        self.driver.execute_script('arguments[0].click();', self.driver.find_element(*Locators.opportunity_link))
+        time.sleep(5)
+        actual_opportunity_name = self.driver.find_element(*Locators.opportunity_name).text
+
+        assert actual_opportunity_name == opportunity, f"Expected {opportunity} , but got {actual_opportunity_name}"
+
 
 
 

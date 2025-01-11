@@ -41,8 +41,8 @@ class Locators:
         return account_name
 
     account_name=(By.XPATH,"(//a[@class='slds-truncate']/span/slot/span/slot)[1]")
-    contact_link=(By.XPATH,"(//div[@class='slds-grid']//span[@class='slds-truncate'])[1]")
-    opportunity_link=(By.XPATH,"(//div[@class='slds-card__body slds-wrap slds-grid']//a)[2]")
+    contact_link=(By.XPATH,"((//records-hoverable-link[@class='slds-grow']//a))[2]")
+    opportunity_link=(By.XPATH,"((//records-hoverable-link[@class='slds-grow']//a))[3]")
     contact_name=(By.XPATH,"//lightning-formatted-name[@slot='primaryField']")
     opportunity_name=(By.XPATH,"(//lightning-formatted-text[@slot='primaryField'])[2]")
 
