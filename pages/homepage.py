@@ -2,7 +2,6 @@ import time
 from selenium.webdriver.support.wait import WebDriverWait
 from datetime import datetime, timedelta
 from pages.locators import Locators
-from selenium.webdriver.common.action_chains import ActionChains
 
 
 class Homepage:
@@ -14,7 +13,7 @@ class Homepage:
         self.driver.find_element(*Locators.username).send_keys(username)
         self.driver.find_element(*Locators.password).send_keys(password)
         self.driver.find_element(*Locators.login).click()
-    def create_lead(self, firstname, lastname, company):
+    def createLead(self, firstname, lastname, company):
         time.sleep(5)
         self.driver.execute_script('arguments[0].click();', self.driver.find_element(*Locators.lead_header))
         time.sleep(10)
@@ -30,7 +29,7 @@ class Homepage:
         self.driver.find_element(*Locators.company).send_keys(company)
         self.driver.find_element(*Locators.saveedit).click()
 
-    def convert_lead(self):
+    def convertLead(self):
         time.sleep(10)
         self.driver.execute_script('arguments[0].click();', self.driver.find_element(*Locators.convert_dropdown))
         time.sleep(5)
@@ -40,7 +39,7 @@ class Homepage:
         time.sleep(5)
         self.driver.find_element(*Locators.close_window).click()
 
-    def verify_converted_lead(self,first_name,last_name,company):
+    def verifyConvertedLead(self,first_name,last_name,company):
         time.sleep(5)
         self.driver.find_element(*Locators.accounts_dropdown).click()
         time.sleep(5)
@@ -74,7 +73,7 @@ class Homepage:
         time.sleep(5)
         self.driver.find_element(*Locators.search_icon).click()
         time.sleep(5)
-        self.driver.find_element(*Locators.recentAccountName(self, contact_name)).click()
+        self.driver.find_element(*Locators.recentAccountName(contact_name)).click()
         time.sleep(5)
         self.driver.find_element(*Locators.lastname).send_keys(last_name)
         self.driver.find_element(*Locators.saveedit).click()
@@ -86,8 +85,8 @@ class Homepage:
         self.driver.execute_script('arguments[0].click();',self.driver.find_element(*Locators.new_opportunity_icon))
         time.sleep(5)
         self.driver.find_element(*Locators.search_icon).click()
-        time.sleep(5)
-        self.driver.find_element(*Locators.recentAccountName(self, account_name)).click()
+        time.sleep(10)
+        self.driver.find_element(*Locators.recentAccountName(account_name)).click()
         time.sleep(5)
         self.driver.find_element(*Locators.opportunity_name_field).send_keys(opportunity_name)
         current_date_plus_10 = (datetime.now() + timedelta(days=10)).strftime("%d/%m/%Y")
@@ -98,28 +97,19 @@ class Homepage:
         self.driver.find_element(*Locators.qualification_option).click()
         self.driver.find_element(*Locators.saveedit).click()
 
-    def verify_contact(self,account_name,contact_name):
+    def verifyContact(self,account_name,contact_name):
         time.sleep(5)
         self.driver.find_element(*Locators.accounts_dropdown).click()
         time.sleep(5)
         self.driver.execute_script('arguments[0].click();',self.driver.find_element(*Locators.recent_method(account_name)))
         time.sleep(5)
-        self.driver.execute_script('arguments[0].click();',self.driver.find_element(*Locators.contact_link))
-        time.sleep(5)
-        actual_contact_name=self.driver.find_element(*Locators.contact_name).text
+        actual_contact_name=self.driver.find_element(*Locators.contactOrOpportunity(contact_name)).text
 
         assert contact_name == actual_contact_name,f"Expected {contact_name} , but got {actual_contact_name}"
 
-    def verify_opportunity(self,opportunity,account_name):
-        time.sleep(5)
-        self.driver.find_element(*Locators.accounts_dropdown).click()
-        time.sleep(5)
-        self.driver.execute_script('arguments[0].click();',
-                                   self.driver.find_element(*Locators.recent_method(account_name)))
-        time.sleep(5)
-        self.driver.execute_script('arguments[0].click();', self.driver.find_element(*Locators.opportunity_link))
-        time.sleep(5)
-        actual_opportunity_name = self.driver.find_element(*Locators.opportunity_name).text
+    def verifyOpportunity(self,opportunity):
+        time.sleep(10)
+        actual_opportunity_name = self.driver.find_element(*Locators.contactOrOpportunity(opportunity)).text
 
         assert actual_opportunity_name == opportunity, f"Expected {opportunity} , but got {actual_opportunity_name}"
 

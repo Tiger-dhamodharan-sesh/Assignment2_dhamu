@@ -13,13 +13,13 @@ class Test(Baseclass):
         self.home.login("dhamodharanvemula-mal0@force.com","Dhamuvemula@123")
 
     def test_create_lead(self):
-        self.home.create_lead("Dhamu","Vemula","Tiger")
+        self.home.createLead("Dhamu","Vemula","Tiger")
 
     def test_convert_lead(self):
-        self.home.convert_lead()
+        self.home.convertLead()
 
     def test_verify_recent_account(self):
-        self.home.verify_converted_lead("Dhamu","Vemula","Tiger")
+        self.home.verifyConvertedLead("Dhamu","Vemula","Tiger")
 
     def test_create_account(self):
         self.home.createAccount("Dhamodharan1")
@@ -31,10 +31,10 @@ class Test(Baseclass):
         self.home.createOpportunity("Dhamodharan1","XYZ")
 
     def test_verify_contact(self):
-        self.home.verify_contact("Dhamodharan1","Vemula")
+        self.home.verifyContact("Dhamodharan1","Vemula")
 
     def test_verify_opportunity(self):
-        self.home.verify_opportunity("XYZ","Dhamodharan1")
+        self.home.verifyOpportunity("XYZ")
 
 
 

@@ -36,13 +36,19 @@ class Locators:
         recent_account=(By.XPATH,f"//span[text()='{text}']/parent::span/parent::a")
         return recent_account
 
-    def recentAccountName(self,text):
+    @staticmethod
+    def recentAccountName(text):
         account_name=(By.XPATH,f"(//span[text()='{text}']/parent::span/parent::span/parent::lightning-base-combobox-item/parent::li)[1]")
         return account_name
 
+    @staticmethod
+    def contactOrOpportunity(text):
+        contact_or_opportunity=(By.XPATH,f"//slot[text()='{text}']")
+        return contact_or_opportunity
+
     account_name=(By.XPATH,"(//a[@class='slds-truncate']/span/slot/span/slot)[1]")
-    contact_link=(By.XPATH,"((//records-hoverable-link[@class='slds-grow']//a))[2]")
-    opportunity_link=(By.XPATH,"((//records-hoverable-link[@class='slds-grow']//a))[3]")
-    contact_name=(By.XPATH,"//lightning-formatted-name[@slot='primaryField']")
-    opportunity_name=(By.XPATH,"(//lightning-formatted-text[@slot='primaryField'])[2]")
+    # contact_link=(By.XPATH,"((//records-hoverable-link[@class='slds-grow']//a))[2]")
+    # opportunity_link=(By.XPATH,"((//records-hoverable-link[@class='slds-grow']//a))[3]")
+    # contact_name=(By.XPATH,"//lightning-formatted-name[@slot='primaryField']")
+    # opportunity_name=(By.XPATH,"(//lightning-formatted-text[@slot='primaryField'])[2]")
 
